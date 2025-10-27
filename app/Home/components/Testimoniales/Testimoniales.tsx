@@ -4,15 +4,28 @@ import React, { useEffect, useState } from "react";
 
 export default function Testimoniales() {
   const [isMounted, setIsMounted] = useState(false);
+  const [sliderKey, setSliderKey] = useState(0); // <-- NUEVO
 
-   useEffect(() => {
+  useEffect(() => {
     setIsMounted(true);
+
     // Reflow para slick en móviles reales (corrige anchuras/colapsos)
-    setTimeout(() => {
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new Event("resize"));
-      }
-    }, 0);
+    const kick = () => {
+      window.dispatchEvent(new Event("resize"));
+      // y remonta el Slider para asegurar recálculo
+      setSliderKey(k => k + 1);
+    };
+
+    // al montar
+    setTimeout(kick, 0);
+    // al rotar / cambiar viewport
+    window.addEventListener("orientationchange", kick);
+    window.addEventListener("resize", kick);
+
+    return () => {
+      window.removeEventListener("orientationchange", kick);
+      window.removeEventListener("resize", kick);
+    };
   }, []);
 
   if (!isMounted) return null;
@@ -21,23 +34,16 @@ export default function Testimoniales() {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
     responsive: [
-      {
-        breakpoint: 1280,
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 1 },
-      },
+      { breakpoint: 1280, settings: { slidesToShow: 2 } },
+      { breakpoint: 768,  settings: { slidesToShow: 1 } },
     ],
   };
-
   const testimonials = [
     {
       name: "Jesus Aguilar",
@@ -82,49 +88,43 @@ export default function Testimoniales() {
         Clientes Satisfechos
       </h2>
 
-      <p className="text-center text-black dark:text-gray-400 max-w-2xl mx-auto mb-10 text-jus">
+      <p className="text-center text-black dark:text-gray-400 max-w-2xl mx-auto mb-10">
         La calidad de trabajo nos respalda y nuestros clientes támbien, agradecemos a todos los que han confiado en nuestros servicios.
       </p>
 
       <div className="max-w-screen-xl mx-auto">
         <div className="h-full">
-          <Slider {...settings}>
+          {/* Remount controlado para forzar recálculo en móviles */}
+          <Slider key={sliderKey} {...settings}>
             {testimonials.map((item, index) => (
-              // Slide: sin flex aquí (evita bug en móviles); centramos dentro
               <div key={index} className="px-4 h-full flex items-stretch">
-                {/* Wrapper interno: centra y limita ancho en móvil */}
-                <div className="mx-auto max-w-[360px] h-full flex items-stretch">
-                  <div
-                    className="rounded-2xl p-6 shadow-lg text-left transition-all duration-300 w-full flex flex-col min-h-[260px]
-                               bg-gray-200 text-neutral-900 border border-neutral-800 hover:border-neutral-300
-                               dark:bg-gray-900 dark:text-white dark:border-cyan-500/30 dark:hover:border-cyan-400/80"
-                    style={{ boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
-                  >
-                    {/* Avatar tipo letra */}
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center text-xl font-bold text-black/90">
-                        {item.name.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="font-semibold">{item.name}</p>
-                        <p className="text-black dark:text-gray-400 text-sm">
-                          Reseña → <span className="text-blue-500">{item.app}</span>
-                        </p>
-                      </div>
+                <div
+                  className="rounded-2xl p-6 shadow-lg text-left transition-all duration-300 w-full flex flex-col min-h-[260px]
+                             bg-gray-200 text-neutral-900 border border-neutral-800 hover:border-neutral-300
+                             dark:bg-gray-900 dark:text-white dark:border-cyan-500/30 dark:hover:border-cyan-400/80"
+                  style={{ boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center text-xl font-bold text-black/90">
+                      {item.name.charAt(0)}
                     </div>
-
-                    {/* Estrellas */}
-                    <div className="flex mb-3 text-yellow-400 text-xl">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i}>{i < item.rating ? "★" : "☆"}</span>
-                      ))}
+                    <div>
+                      <p className="font-semibold">{item.name}</p>
+                      <p className="text-black dark:text-gray-400 text-sm">
+                        Reseña → <span className="text-blue-500">{item.app}</span>
+                      </p>
                     </div>
-
-                    {/* Comentario */}
-                    <p className="text-sm leading-relaxed text-justify text-black dark:text-gray-300">
-                      {item.quote}
-                    </p>
                   </div>
+
+                  <div className="flex mb-3 text-yellow-400 text-xl">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i}>{i < item.rating ? "★" : "☆"}</span>
+                    ))}
+                  </div>
+
+                  <p className="text-sm leading-relaxed text-justify text-black dark:text-gray-300">
+                    {item.quote}
+                  </p>
                 </div>
               </div>
             ))}
