@@ -7,6 +7,12 @@ export default function Testimoniales() {
 
   useEffect(() => {
     setIsMounted(true);
+    // Reflow para slick en móviles reales (corrige anchuras/colapsos)
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("resize"));
+      }
+    }, 0);
   }, []);
 
   if (!isMounted) return null;
@@ -23,15 +29,11 @@ export default function Testimoniales() {
     responsive: [
       {
         breakpoint: 1280,
-        settings: {
-          slidesToShow: 2,
-        },
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-        },
+        settings: { slidesToShow: 1 },
       },
     ],
   };
@@ -88,37 +90,41 @@ export default function Testimoniales() {
         <div className="h-full">
           <Slider {...settings}>
             {testimonials.map((item, index) => (
-              <div key={index} className="px-4 h-full flex items-stretch">
-                <div
-                  className="rounded-2xl p-6 shadow-lg text-left transition-all duration-300 w-full flex flex-col min-h-[260px]
-                             bg-gray-200 text-neutral-900 border border-neutral-800 hover:border-neutral-300
-                             dark:bg-gray-900 dark:text-white dark:border-cyan-500/30 dark:hover:border-cyan-400/80"
-                  style={{ boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
-                >
-                  {/* Avatar tipo letra */}
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center text-xl font-bold text-black/90">
-                      {item.name.charAt(0)}
+              // Slide: sin flex aquí (evita bug en móviles); centramos dentro
+              <div key={index} className="px-4">
+                {/* Wrapper interno: centra y limita ancho en móvil */}
+                <div className="mx-auto max-w-[360px] h-full flex items-stretch">
+                  <div
+                    className="rounded-2xl p-6 shadow-lg text-left transition-all duration-300 w-full flex flex-col min-h-[260px]
+                               bg-gray-200 text-neutral-900 border border-neutral-800 hover:border-neutral-300
+                               dark:bg-gray-900 dark:text-white dark:border-cyan-500/30 dark:hover:border-cyan-400/80"
+                    style={{ boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
+                  >
+                    {/* Avatar tipo letra */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center text-xl font-bold text-black/90">
+                        {item.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-black dark:text-gray-400 text-sm">
+                          Reseña → <span className="text-blue-500">{item.app}</span>
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold">{item.name}</p>
-                      <p className="text-black dark:text-gray-400 text-sm">
-                        Reseña → <span className="text-blue-500">{item.app}</span>
-                      </p>
+
+                    {/* Estrellas */}
+                    <div className="flex mb-3 text-yellow-400 text-xl">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i}>{i < item.rating ? "★" : "☆"}</span>
+                      ))}
                     </div>
-                  </div>
 
-                  {/* Estrellas */}
-                  <div className="flex mb-3 text-yellow-400 text-xl">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i}>{i < item.rating ? "★" : "☆"}</span>
-                    ))}
+                    {/* Comentario */}
+                    <p className="text-sm leading-relaxed text-justify text-black dark:text-gray-300">
+                      {item.quote}
+                    </p>
                   </div>
-
-                  {/* Comentario */}
-                  <p className="text-sm leading-relaxed text-justify text-black dark:text-gray-300">
-                    {item.quote}
-                  </p>
                 </div>
               </div>
             ))}

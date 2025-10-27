@@ -115,17 +115,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-.slick-slide {
-  display: flex !important;
-  justify-content: center;
-}
-
-.slick-slide > div {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 
 @layer base {
   * {

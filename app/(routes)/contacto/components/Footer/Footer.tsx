@@ -1,6 +1,6 @@
 "use client";
 
-import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 
 export default function Footer() {
@@ -23,7 +23,7 @@ export default function Footer() {
             <FaFacebook />
           </Link>
           <Link
-            href="https://www.instagram.com/hb_studios14/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"
+            href="https://www.instagram.com/systech_04?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             aria-label="Instagram"
             className="text-pink-600 hover:text-red-800 dark:text-pink-400 dark:hover:text-[#00ffff] transition"
@@ -31,15 +31,15 @@ export default function Footer() {
             <FaInstagram />
           </Link>
           <Link
-            href="#"
+            href="https://youtube.com/@systech_oficial?si=ZBDj18eOpmyYTZBE"
             target="_blank"
-            aria-label="WhatsApp"
-            className="text-green-600 hover:text-red-800 dark:text-green-400 dark:hover:text-[#00ffff] transition"
+            aria-label="Youtube"
+            className="text-red-600 hover:text-red-800 dark:text-red-600 dark:hover:text-[#00ffff] transition"
           >
-            <FaWhatsapp />
+            <FaYoutube />
           </Link>
           <Link
-            href="https://www.tiktok.com/@systech53?is_from_webapp=1&sender"
+            href="https://www.tiktok.com/@systech_oficial?is_from_webapp=1&sender"
             target="_blank"
             aria-label="TikTok"
             className="text-black hover:text-red-800 dark:text-white dark:hover:text-[#00ffff] transition"
