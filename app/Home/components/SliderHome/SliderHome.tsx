@@ -1,16 +1,25 @@
-"use client"
-import React from 'react'
-import Image  from "next/image"
+"use client";
+import Image from "next/image";
 
 export default function SliderHome() {
-
   return (
-    <section className="relative w-full h-96 bg-black flex items-center justify-center">
-      <Image src="/iconos/logo.jpg"
-        alt="Logo HB Studios"
-        width={300} 
-        height={100} />
+    <section
+      className="
+        relative w-full overflow-hidden
+        aspect-[16/9] md:h-[420px] md:aspect-auto
+        bg-black
+      "
+      
+    >
+      <Image
+        src="/logos/slider.png"
+        alt="SYSTECH"
+        fill
+   
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 1200px"
+        priority
+      />
     </section>
   );
-
 }

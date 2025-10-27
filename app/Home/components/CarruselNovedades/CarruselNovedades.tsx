@@ -1,21 +1,18 @@
 // components/Home/CarruselNovedades.tsx
-"use client"; // Asegúrate de que este componente se ejecute solo en el cliente
-import { Button } from '@/components/ui/button';
-import Slider from 'react-slick';
-import { useRouter } from 'next/navigation'; // Cambia de 'next/router' a 'next/navigation'
-import React, { useEffect, useState } from 'react';
+"use client";
+
+import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import React from "react";
+import type { Settings } from "react-slick";
+
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
 const CarruselNovedades = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter(); // Este es el router adecuado en la estructura de app/
+  const router = useRouter();
 
-  useEffect(() => {
-    setIsMounted(true); // Se asegura de que el componente se haya montado
-  }, []);
-
-  if (!isMounted) return null;
-
-  const settings = {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -27,31 +24,37 @@ const CarruselNovedades = () => {
   };
 
   return (
-    <section className="py-8">
-      <h2 className="text-3xl font-extrabold text-center mb-8 uppercase tracking-wide">Últimos Lanzamientos</h2>
+    <section className="py-20">
+      <h2 className="text-3xl font-extrabold text-center mb-5 uppercase tracking-wide
+               text-neutral-900 dark:text-white">
+        Nuestros servicios
+      </h2>
 
-      <Slider {...settings}>
-        <div className="w-full flex justify-center items-center">
-          <img src="/ultimos-lanzamientos/playmovies_icono.jpg" alt="PlayMovies"  className="object-contain rounded-lg shadow-md mx-auto" style={{ width: '412px', height: '412px', boxShadow: "0 0 10px rgba(0,255,255,0.2)" }} />
+      {/* Envolver todo para controlar stacking */}
+      <div className="relative max-w-[640px] mx-auto">
+        {/* Carrusel debajo en el stacking */}
+        <div className="relative z-0">
+          <Slider {...settings}>
+            <div className="w-full flex justify-center items-center">
+              <img
+                src="/servicios/mantenimiento-1.jpg"
+                alt="PlayMovies"
+                className="object-contain rounded-lg shadow-md mx-auto"
+                style={{ width: "100%", maxWidth: 612, height: "auto", boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
+              />
+            </div>
+          </Slider>
         </div>
-        <div className="w-full flex justify-center items-center">
-          <img src="/ultimos-lanzamientos/icono-birddash.png" alt="Bird Dash"  className="object-contain rounded-lg shadow-md mx-auto" style={{ width: '412px', height: '412px', boxShadow: "0 0 10px rgba(0,255,255,0.2)" }} />
-        </div>
-        <div className="w-full flex justify-center items-center">
-          <img src="/ultimos-lanzamientos/fp_wallpapers_icono.jpg" alt="Go Translate: Traductor de idiomas"  className="object-contain rounded-lg shadow-md mx-auto" style={{ width: '412px', height: '412px', boxShadow: "0 0 10px rgba(0,255,255,0.2)" }} />
-        </div>
-        <div className="w-full flex justify-center items-center">
-          <img src="/ultimos-lanzamientos/go_translate_icono.jpg" alt="FP Wallpapers"  className="object-contain rounded-lg shadow-md mx-auto" style={{ width: '412px', height: '412px', boxShadow: "0 0 10px rgba(0,255,255,0.2)" }} />
-        </div>
-      </Slider>
 
-      <div className="text-center mt-4">
-        <Button 
-          className="bg-white text-black hover:bg-[#00ffff] mt-7" 
-          onClick={() => router.push('/descargar-apps')}
-        >
-          Ver Más
-        </Button>
+        {/* Botón por encima y pegado al carrusel */}
+        <div className="relative z-10 mt-4 flex justify-center">
+          <Button
+            className="bg-black text-white hover:text-black hover:bg-[#00ffff]
+             dark:bg-[#00ffff] dark:text-black dark:hover:bg-[#7fffff]"
+          >
+            Más Servicios
+          </Button>
+        </div>
       </div>
     </section>
   );
