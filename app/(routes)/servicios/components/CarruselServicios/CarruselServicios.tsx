@@ -9,7 +9,7 @@ import type { Settings } from "react-slick";
 
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
-const CarruselNovedades = () => {
+const CarruselServicios = () => {
   const router = useRouter();
 
   const settings: Settings = {
@@ -51,6 +51,7 @@ const CarruselNovedades = () => {
           <Button
             className="bg-black text-white hover:text-black hover:bg-[#00ffff]
              dark:bg-[#00ffff] dark:text-black dark:hover:bg-[#7fffff]"
+             onClick={() => router.push('/servicios')}
           >
             Más Servicios
           </Button>
@@ -60,4 +61,4 @@ const CarruselNovedades = () => {
   );
 };
 
-export default CarruselNovedades;
+export default CarruselServicios;

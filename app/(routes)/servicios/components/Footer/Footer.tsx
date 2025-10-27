@@ -15,7 +15,7 @@ export default function Footer() {
         {/* Redes sociales */}
         <div className="flex justify-center space-x-6 text-2xl">
           <Link
-            href="https://www.facebook.com/profile.php?id=61557207407406"
+            href="https://www.facebook.com/share/16B9hLxNeS/"
             target="_blank"
             aria-label="Facebook"
             className="text-blue-700 hover:text-red-800 dark:text-blue-400 dark:hover:text-[#00ffff] transition"

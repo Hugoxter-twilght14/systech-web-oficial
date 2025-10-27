@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/Shared/Navbar"
-import SliderHome from "./Home/components/SliderHome/SliderHome"
-import CarruselNovedades from "./Home/components/CarruselServicios/CarruselServicios"
-import Footer from "./Home/components/Footer/Footer"
+import SliderHome from "./components/SliderHome/SliderHome"
+import CarruselNovedades from "./components/CarruselServicios/CarruselServicios"
+import Footer from "./components/Footer/Footer"
 
 
-export default function Home() {
+export default function page() {
   return (
     <div className="w-full min-h-screen bg-background text-white overflow-x-hidden">
       <Navbar />
