@@ -1,7 +1,8 @@
 import { Navbar } from "@/components/Shared/Navbar"
 import SliderHome from "./Home/components/SliderHome/SliderHome"
-import CarruselNovedades from "./Home/components/CarruselServicios/CarruselServicios"
 import Footer from "./Home/components/Footer/Footer"
+import CarruselServicios from "./Home/components/CarruselServicios/CarruselServicios"
+import Testimoniales from "./Home/components/Testimoniales/Testimoniales"
 
 
 export default function Home() {
@@ -15,7 +16,11 @@ export default function Home() {
       </section>
 
       <section className="w-full px-4 sm:px-6 md:px-8 py-8 mt-[-100px]">
-        <CarruselNovedades/>
+        <CarruselServicios/>
+      </section>
+
+      <section className="w-full px-4 sm:px-6 md:px-8 py-8 mt-[-80px]">
+        <Testimoniales/>
       </section>
 
       <section className="w-full mt-[-80px]">

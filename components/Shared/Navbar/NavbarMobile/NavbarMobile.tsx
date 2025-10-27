@@ -13,6 +13,7 @@ import { useScrollPosition } from "@/hooks/UseScrollPosition";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { ToggleTheme } from "@/components/ui/toggle-theme";
 
 export default function NavbarMobile() {
   const scrollPosition = useScrollPosition();
@@ -70,6 +71,12 @@ export default function NavbarMobile() {
             </div>
 
             <div className={cn("border my-5", isDark ? "border-white/40" : "border-black/30")} />
+
+            <ToggleTheme className="mx-3 my-[-10px]"/>
+
+            <div className="flex justify-center mt-35">
+            <Logo/>
+          </div>
           </SheetContent>
         </Sheet>
       </div>

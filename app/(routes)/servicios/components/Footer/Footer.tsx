@@ -15,7 +15,7 @@ export default function Footer() {
         {/* Redes sociales */}
         <div className="flex justify-center space-x-6 text-2xl">
           <Link
-            href="https://www.facebook.com/share/16B9hLxNeS/"
+            href="https://www.facebook.com/profile.php?id=61557207407406"
             target="_blank"
             aria-label="Facebook"
             className="text-blue-700 hover:text-red-800 dark:text-blue-400 dark:hover:text-[#00ffff] transition"
@@ -31,7 +31,7 @@ export default function Footer() {
             <FaInstagram />
           </Link>
           <Link
-            href="https://www.whatsapp.com/channel/0029VaeFE7vJ3jv0723pXa1P"
+            href="#"
             target="_blank"
             aria-label="WhatsApp"
             className="text-green-600 hover:text-red-800 dark:text-green-400 dark:hover:text-[#00ffff] transition"
@@ -39,7 +39,7 @@ export default function Footer() {
             <FaWhatsapp />
           </Link>
           <Link
-            href="https://www.tiktok.com/@tu_usuario"
+            href="https://www.tiktok.com/@systech53?is_from_webapp=1&sender"
             target="_blank"
             aria-label="TikTok"
             className="text-black hover:text-red-800 dark:text-white dark:hover:text-[#00ffff] transition"

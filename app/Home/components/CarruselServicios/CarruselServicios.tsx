@@ -24,10 +24,11 @@ export default function CarruselServicios() {
   };
 
   return (
-    <section className="py-20">
+    <section className="py-30">
       <h2 className="text-3xl font-extrabold text-center mb-5 uppercase tracking-wide text-neutral-900 dark:text-white">
         Nuestros servicios
       </h2>
+      <p className="text-center text-black dark:text-gray-400 max-w-2xl mx-auto mb-10">Conoce nuestros diferentes servicios, elige el que necesitas y cotiza sin compromiso</p>
       <div className="relative mx-auto px-4 w-full max-w-[680px]">
         <div className="relative z-0">
           <Slider {...settings}>
