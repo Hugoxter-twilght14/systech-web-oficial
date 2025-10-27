@@ -21,7 +21,7 @@ export default function Testimoniales() {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
