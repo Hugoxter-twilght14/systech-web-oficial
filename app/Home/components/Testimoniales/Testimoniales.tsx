@@ -46,20 +46,6 @@ export default function Testimoniales() {
   };
   const testimonials = [
     {
-      name: "Jesus Aguilar",
-      quote:
-        "Lleve mi laptop porque estaba demasiado lenta y se calentaba, los chicos le dieron mantenimiento y limpieza y ahora mi laptop esta mas fluida y ya no calienta",
-      app: "Mantenimiento general Laptop",
-      rating: 5,
-    },
-    {
-      name: "Carlos M.",
-      quote:
-        "Los mejores, lleve mi laptop a mantenimiento preventivo, no tardaron mucho en realizarlo, a los 3 dias ya la tenia de vuelta y sin detalles, trabajo limpio y a buen precio",
-      app: "Mantenimiento preventivo Laptop HP",
-      rating: 5,
-    },
-    {
       name: "Estefania López",
       quote:
         "Mi equipo se trababa mucho y calentaba, le hicieron diagnostico y resulta que era por falta de mantenimiento y por que tenia un virus, los chicos me ayudaron a solucionarlo, ya no se calienta ni traba mi laptop, muy amables y su trabajo es de calidad",
