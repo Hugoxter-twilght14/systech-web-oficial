@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 export default function Testimoniales() {
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
+   useEffect(() => {
     setIsMounted(true);
     // Reflow para slick en móviles reales (corrige anchuras/colapsos)
     setTimeout(() => {
@@ -82,7 +82,7 @@ export default function Testimoniales() {
         Clientes Satisfechos
       </h2>
 
-      <p className="text-center text-black dark:text-gray-400 max-w-2xl mx-auto mb-10">
+      <p className="text-center text-black dark:text-gray-400 max-w-2xl mx-auto mb-10 text-jus">
         La calidad de trabajo nos respalda y nuestros clientes támbien, agradecemos a todos los que han confiado en nuestros servicios.
       </p>
 
@@ -91,7 +91,7 @@ export default function Testimoniales() {
           <Slider {...settings}>
             {testimonials.map((item, index) => (
               // Slide: sin flex aquí (evita bug en móviles); centramos dentro
-              <div key={index} className="px-4">
+              <div key={index} className="px-4 h-full flex items-stretch">
                 {/* Wrapper interno: centra y limita ancho en móvil */}
                 <div className="mx-auto max-w-[360px] h-full flex items-stretch">
                   <div
