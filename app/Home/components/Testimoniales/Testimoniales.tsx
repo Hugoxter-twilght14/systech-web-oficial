@@ -1,27 +1,35 @@
 "use client";
 import Slider from "react-slick";
 import React, { useEffect, useState } from "react";
+import type { Settings, ResponsiveObject } from "react-slick";
 
 export default function Testimoniales() {
   const [isMounted, setIsMounted] = useState(false);
-  const [sliderKey, setSliderKey] = useState(0); // <-- NUEVO
+  const [sliderKey, setSliderKey] = useState(0);
+  const [baseSlides, setBaseSlides] = useState(1); // ← slides iniciales según ancho real
 
   useEffect(() => {
     setIsMounted(true);
 
-    // Reflow para slick en móviles reales (corrige anchuras/colapsos)
+    // Determina slides iniciales por ancho real (evita el bug en móviles)
+    const calcBase = () => {
+      const w = typeof window !== "undefined" ? window.innerWidth : 0;
+      setBaseSlides(w < 768 ? 1 : w < 1280 ? 2 : 3);
+    };
+    calcBase();
+
+    // Reflow/remount para que Slick recalcule bien en móviles reales
     const kick = () => {
-      window.dispatchEvent(new Event("resize"));
-      // y remonta el Slider para asegurar recálculo
-      setSliderKey(k => k + 1);
+      calcBase();
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("resize"));
+        setSliderKey((k) => k + 1);
+      }
     };
 
-    // al montar
     setTimeout(kick, 0);
-    // al rotar / cambiar viewport
     window.addEventListener("orientationchange", kick);
     window.addEventListener("resize", kick);
-
     return () => {
       window.removeEventListener("orientationchange", kick);
       window.removeEventListener("resize", kick);
@@ -30,21 +38,36 @@ export default function Testimoniales() {
 
   if (!isMounted) return null;
 
-  const settings = {
+  const settings: Settings = {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 3,
+    slidesToShow: baseSlides, // ← usamos el cálculo inicial
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: false,
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 2 } },
-      { breakpoint: 768,  settings: { slidesToShow: 1 } },
-    ],
+      { breakpoint: 768, settings: { slidesToShow: 1 } },
+    ] as ResponsiveObject[],
   };
+
   const testimonials = [
+    {
+      name: "Jesus Aguilar",
+      quote:
+        "Lleve mi laptop porque estaba demasiado lenta y se calentaba, los chicos le dieron mantenimiento y limpieza y ahora mi laptop esta mas fluida y ya no calienta",
+      app: "Mantenimiento general Laptop",
+      rating: 5,
+    },
+    {
+      name: "Carlos M.",
+      quote:
+        "Los mejores, lleve mi laptop a mantenimiento preventivo, no tardaron mucho en realizarlo, a los 3 dias ya la tenia de vuelta y sin detalles, trabajo limpio y a buen precio",
+      app: "Mantenimiento preventivo Laptop HP",
+      rating: 5,
+    },
     {
       name: "Estefania López",
       quote:
@@ -80,7 +103,7 @@ export default function Testimoniales() {
 
       <div className="max-w-screen-xl mx-auto">
         <div className="h-full">
-          {/* Remount controlado para forzar recálculo en móviles */}
+          {/* Remount controlado para asegurar recálculo */}
           <Slider key={sliderKey} {...settings}>
             {testimonials.map((item, index) => (
               <div key={index} className="px-4 h-full flex items-stretch">
@@ -90,6 +113,7 @@ export default function Testimoniales() {
                              dark:bg-gray-900 dark:text-white dark:border-cyan-500/30 dark:hover:border-cyan-400/80"
                   style={{ boxShadow: "0 0 10px rgba(0,255,255,0.2)" }}
                 >
+                  {/* Avatar tipo letra */}
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center text-xl font-bold text-black/90">
                       {item.name.charAt(0)}
@@ -102,12 +126,14 @@ export default function Testimoniales() {
                     </div>
                   </div>
 
+                  {/* Estrellas */}
                   <div className="flex mb-3 text-yellow-400 text-xl">
                     {[...Array(5)].map((_, i) => (
                       <span key={i}>{i < item.rating ? "★" : "☆"}</span>
                     ))}
                   </div>
 
+                  {/* Comentario */}
                   <p className="text-sm leading-relaxed text-justify text-black dark:text-gray-300">
                     {item.quote}
                   </p>
