@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Shared/Navbar"
 import SliderHome from "./components/SliderHome/SliderHome"
-import CarruselNovedades from "./components/CarruselServicios/CarruselServicios"
 import Footer from "./components/Footer/Footer"
+import Contacto from "./components/Contacto/Contacto"
 
 
 export default function page() {
@@ -14,9 +14,9 @@ export default function page() {
         <SliderHome/>
       </section>
 
-      <section className="w-full px-4 sm:px-6 md:px-8 py-8 mt-[-100px]">
-        <CarruselNovedades/>
-      </section>
+      <main className="flex-grow">
+        <Contacto />
+      </main>
 
       <section className="w-full mt-[-80px]">
         <Footer/>
