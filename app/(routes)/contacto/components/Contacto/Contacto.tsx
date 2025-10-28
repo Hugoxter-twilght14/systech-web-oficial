@@ -45,8 +45,8 @@ export default function Contacto() {
         <h2 className="text-3xl font-extrabold uppercase">Contáctanos</h2>
 
         <p className="text-neutral-700 dark:text-gray-400">
-          ¿Quieres colaborar con nosotros o probar las betas de nuestros futuros lanzamientos? Llena el
-          formulario o contáctanos en nuestras redes.
+          Te proporcionamos toda la información, redes y números de telefono para contactarnos.
+          si necesitas cotizar algo no dudes en acudir a algua de estas opciones o rellena el siguiente formulario.
         </p>
 
         <div className="space-y-4 text-sm text-neutral-900 dark:text-gray-300">
@@ -78,7 +78,7 @@ export default function Contacto() {
           <div>
             <span className="block font-medium text-neutral-900 dark:text-white">Teléfonos:</span>
               <ul className="mt-1 flex flex-wrap gap-2">
-                {["962 214 4484", "9943556780", "5632346789", "1354679084"].map((n) => (
+                {["962 214 4484", "918 694 9662", "962 170 5420", "962 149 8656"].map((n) => (
                   <li key={n}>
                     <a
                       href={`tel:${n.replace(/\s/g, "")}`}
